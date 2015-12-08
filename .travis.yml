@@ -1,0 +1,19 @@
+language: cpp
+sudo: required
+dist: trusty
+
+compiler:
+- gcc
+- clang
+
+addons:
+  apt:
+    packages:
+    - libopencv-dev
+
+before_script:
+- git clone https://github.com/bytedeco/javacpp
+- pushd javacpp; mvn --quiet install; popd
+
+script:
+- mvn package --quiet --projects .,opencv
